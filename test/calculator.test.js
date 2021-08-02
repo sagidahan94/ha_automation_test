@@ -1,33 +1,34 @@
-// const { Key, By, Builder, until } = require("selenium-webdriver");
 const calculatepage = require("../pages/calculatepage");
-// var webdriver = require("selenium-webdriver");
-// var driver = new webdriver.Builder().forBrowser("chrome").build();
-// driver.manage().setTimeouts({ implicit: 10000 });
 
 describe("Check google calculator", () => {
-  beforeEach(() => {
-    //   var google_calc_url = "https://www.google.co.il/search?q=google+calculator";
-    //   calculatepage.open_calc(google_calc_url);
-    //   this.setTimeout(() => {
-    //   }, 5000);
+  beforeAll(() => {
+    console.log("Tests begin");
   });
 
-  afterEach(() => {
-    // calculatepage.quit();
+  afterAll(() => {
+    console.log("Tests finished");
+    calculatepage.quit();
   });
 
-  it("check two number addition", async () => {
+  it("check two number addition (5+10)", async () => {
     var google_calc_url = "https://www.google.co.il/search?q=google+calculator";
     await calculatepage.open_calc(google_calc_url);
-    await calculatepage.click_five();
-    await calculatepage.click_plus();
+    await calculatepage.click_number(5);
+    await calculatepage.click_operator("+");
     await calculatepage.click_ten();
-    await calculatepage.click_equal();
+    await calculatepage.click_operator("=");
     let googleCalcResult = await calculatepage.get_result();
     expect(googleCalcResult).toBe(15);
   });
 
-  it("Check number of buttons in calculator", async () => {});
+  it("Check number of buttons in calculator", async () => {
+    let numOfButtons = await calculatepage.get_number_of_buttons();
+    expect(numOfButtons).toBe(34);
+  });
 
-  it("Check number of numeric buttons in calculator", async () => {});
+  it("Check number of numeric buttons in calculator", async () => {
+    let numOfNumericButtons =
+      await calculatepage.get_number_of_numeric_buttons();
+    expect(numOfNumericButtons).toBe(10);
+  });
 });
