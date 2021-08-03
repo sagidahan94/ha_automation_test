@@ -7,3 +7,8 @@ steps to run code:
 3. $ cd ../path/to/the/file
 4. $ npm install
 5. $ npm test
+
+notes :
+
+1. If chromedriver.exe cause problems- download chrome driver according to your chrome version.
+
